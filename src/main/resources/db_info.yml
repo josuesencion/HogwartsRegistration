@@ -1,0 +1,5 @@
+username: 'josue'
+password: '168486465131'
+mysql_conn_string: 'jdbc:mysql://localhost/hogwarts'
+
+

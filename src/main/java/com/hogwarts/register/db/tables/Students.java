@@ -21,6 +21,7 @@ public class Students {
                 stringBuffer.append(rs.getString("last_name") + " ");
                 stringBuffer.append(rs.getString("grade_year") + " ");
                 stringBuffer.append(rs.getInt("age") + " ");
+                stringBuffer.append(rs.getString("house") + " ");
                 stringBuffer.append(rs.getString("tuition_balance") + " ");
                 stringBuffer.append(rs.getString("phone_number") + " ");
                 stringBuffer.append(rs.getString("student_email") + " ");
@@ -48,6 +49,7 @@ public class Students {
                 student.setLastName(rs.getString("last_name"));
                 student.setGradeYear(rs.getString("grade_year"));
                 student.setAge(rs.getInt("age"));
+                student.setHouse(rs.getString("house"));
                 student.setTuitionBalance(rs.getDouble("tuition_balance"));
                 student.setPhoneNumber(rs.getString("phone_number"));
                 student.setStudentEmail(rs.getString("student_email"));
@@ -63,9 +65,9 @@ public class Students {
     }
 
     public static boolean insert(Student student) {
-        String sql = "INSERT INTO `students` (`id`, `student_id`, `name`, `last_name`, `grade_year`, `age`," +
-                " `tuition_balance`, `phone_number`, `student_email`) VALUES (NULL, ?, ?, ?, ?, ?, " +
-                "?, ?, ?)";
+        String sql = "INSERT INTO `students` (`id`, `student_id`, `name`, `last_name`, `grade_year`, `age`, `house`, " +
+                "`tuition_balance`, `phone_number`, `student_email`, `password`) VALUES (NULL, ?, ?, ?, ?, ?, " +
+                "?, ?, ?, ?, ?)";
 
         ResultSet rs = null;
         try (Connection conn = ConnectionManager.connectToDb();
@@ -76,9 +78,11 @@ public class Students {
             stmt.setString(3, student.getLastName());
             stmt.setString(4, student.getGradeYear());
             stmt.setInt(5, student.getAge());
-            stmt.setDouble(6, student.getTuitionBalance());
-            stmt.setString(7, student.getPhoneNumber());
-            stmt.setString(8, student.getStudentEmail());
+            stmt.setString(6, student.getHouse());
+            stmt.setDouble(7, student.getTuitionBalance());
+            stmt.setString(8, student.getPhoneNumber());
+            stmt.setString(9, student.getStudentEmail());
+            stmt.setString(10, student.getPassword());
 
             stmt.executeUpdate();
             rs = stmt.getGeneratedKeys();
@@ -101,9 +105,10 @@ public class Students {
 
 
     public static boolean update(Student student) {
-        String sql = "UPDATE `students` SET `name` = ?, `last_name` = ?," +
-                " `grade_year` = ?, `age` = ?, `tuition_balance` = ?, `phone_number` = ?," +
-                " `student_email` = ? WHERE `students`.`student_id` = ?";
+        String sql = "UPDATE `students` SET `student_id` = '?', `name` = '?', `last_name` = '?'," +
+                " `grade_year` = '?', `age` = '?', `house` = '?', `tuition_balance` = '?'," +
+                " `phone_number` = '?    ', `student_email` = '?', `password` = '?' " +
+                "WHERE `students`.`id` = ?";
 
         ResultSet rs = null;
         try (Connection conn = ConnectionManager.connectToDb();
@@ -113,10 +118,12 @@ public class Students {
             stmt.setString(2, student.getLastName());
             stmt.setString(3, student.getGradeYear());
             stmt.setInt(4, student.getAge());
-            stmt.setDouble(5, student.getTuitionBalance());
-            stmt.setString(6, student.getPhoneNumber());
-            stmt.setString(7, student.getStudentEmail());
-            stmt.setString(8, student.getStudentId());
+            stmt.setString(5,student.getHouse());
+            stmt.setDouble(6, student.getTuitionBalance());
+            stmt.setString(7, student.getPhoneNumber());
+            stmt.setString(8, student.getStudentEmail());
+            stmt.setString(9, student.getStudentId());
+            stmt.setString(10, student.getPassword());
 
             int affectedRows = stmt.executeUpdate();
             rs = stmt.getGeneratedKeys();

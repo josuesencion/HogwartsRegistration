@@ -18,6 +18,11 @@
       <artifactId>mysql-connector-java</artifactId>
       <version>5.1.6</version>
     </dependency>
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-lang3</artifactId>
+      <version>3.4</version>
+    </dependency>
   </dependencies>
   <build>
     <plugins>
@@ -30,6 +35,30 @@
           <target>1.8</target>
         </configuration>
       </plugin>
+      <plugin>
+        <!-- Build an executable JAR -->
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>3.1.0</version>
+        <configuration>
+          <archive>
+            <manifest>
+              <addClasspath>true</addClasspath>
+              <classpathPrefix>lib/</classpathPrefix>
+              <mainClass>com.hogwarts.register.HogwartsApp</mainClass>
+            </manifest>
+          </archive>
+        </configuration>
+      </plugin>
     </plugins>
+    <resources>
+      <resource>
+        <directory>src/main/resources/</directory>
+        <includes>
+          <include>src/main/resources/studentList.txt</include>
+          <include>src/main/resources/db_info.yml</include>
+        </includes>
+      </resource>
+    </resources>
   </build>
 </project>

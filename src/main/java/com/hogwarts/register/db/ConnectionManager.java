@@ -15,8 +15,8 @@ public class ConnectionManager {
     private ConnectionManager() {
     }
 
-    private static ConnectionManager createConnection(){
-        if(connectionManager == null){
+    private static ConnectionManager createConnection() {
+        if (connectionManager == null) {
             connectionManager = new ConnectionManager();
         }
         return connectionManager;
@@ -24,14 +24,14 @@ public class ConnectionManager {
 
     public static Connection connectToDb() {
         try {
-            conn = DriverManager.getConnection(MYSQL_CONN_STRING,USERNAME,PASSWORD);
+            conn = DriverManager.getConnection(MYSQL_CONN_STRING, USERNAME, PASSWORD);
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return conn;
     }
 
-    public static void close(){
+    public static void close() {
         try {
             conn.close();
             conn = null;
@@ -40,9 +40,6 @@ public class ConnectionManager {
         }
 
     }
-
-
-
 
 
 }

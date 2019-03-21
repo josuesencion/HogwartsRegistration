@@ -9,9 +9,11 @@ public class Student implements Serializable {
     private String lastName;
     private String gradeYear;
     private int age;
+    private String house;
     private double tuitionBalance;
     private String phoneNumber;
     private String studentEmail;
+    private String password;
 
     public Student() {
     }
@@ -40,6 +42,10 @@ public class Student implements Serializable {
         return age;
     }
 
+    public String getHouse() {
+        return house;
+    }
+
     public double getTuitionBalance() {
         return tuitionBalance;
     }
@@ -50,6 +56,10 @@ public class Student implements Serializable {
 
     public String getStudentEmail() {
         return studentEmail;
+    }
+
+    public String getPassword() {
+        return password;
     }
 
     public void setId(int id) {
@@ -76,6 +86,10 @@ public class Student implements Serializable {
         this.age = age;
     }
 
+    public void setHouse(String house) {
+        this.house = house;
+    }
+
     public void setTuitionBalance(double tuitionBalance) {
         this.tuitionBalance = tuitionBalance;
     }
@@ -86,6 +100,10 @@ public class Student implements Serializable {
 
     public void setStudentEmail(String studentEmail) {
         this.studentEmail = studentEmail;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     @Override

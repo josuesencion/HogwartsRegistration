@@ -5,8 +5,7 @@ public enum GradeYear {
     FRESHMAN("Freshman"),
     SOPHOMORE("Sophomore"),
     JUNIOR("Junior"),
-    SENIOR("Senior")
-    ;
+    SENIOR("Senior");
 
     private final String text;
 
@@ -16,6 +15,6 @@ public enum GradeYear {
 
     @Override
     public String toString() {
-        return text;
+        return this.text;
     }
 }
