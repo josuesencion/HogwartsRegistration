@@ -12,5 +12,7 @@ public class HogwartsApp {
         String studentList = "src/main/resources/studentList.txt";
         Registrar.batchRegistration(studentList);
         Students.displayAllRows();
+
+//        System.out.println(Registrar.sortingHatApi());
     }
 }

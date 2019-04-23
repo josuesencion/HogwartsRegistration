@@ -6,6 +6,12 @@ import com.hogwarts.register.db.tables.Students;
 import com.hogwarts.register.util.FetchFile;
 import org.apache.commons.lang3.RandomStringUtils;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Random;
@@ -44,6 +50,36 @@ public class Registrar {
         String[] houses = {"Gryffindor", "Hufflepuff", "Ravenclaw", "Slytherin"};
         Random rand = new Random();
         return houses[rand.nextInt(4)];
+    }
+
+    public static String sortingHatApi() {
+        String house = null;
+        try {
+            URL url = new URL("https://www.potterapi.com/v1/sortingHat");
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("GET");
+            conn.setRequestProperty("Content-Type", "application/json");
+            conn.setConnectTimeout(5000);
+            conn.setReadTimeout(5000);
+
+            int status = conn.getResponseCode();
+            Reader inStreamReader = (status > 299)? new InputStreamReader(conn.getErrorStream()):
+                    new InputStreamReader(conn.getInputStream());
+
+            BufferedReader br = new BufferedReader(inStreamReader);
+
+            String inputLine;
+            if ((inputLine = br.readLine()) != null) {
+                house = inputLine;
+            }
+
+            br.close();
+            conn.disconnect();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }finally {
+            return house.replaceAll("\"", "");
+        }
     }
 
     public static void batchRegistration(String file){
